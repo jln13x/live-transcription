@@ -63,14 +63,13 @@ const useLiveTranscription = () => {
           await realtimeTranscriber.current.close();
           realtimeTranscriber.current = null;
         }
-      })();
 
-      if (recorder.current) {
-        console.log("cleaning up recorder");
-        recorder.current.stopRecording();
-        recorder.current.destroy();
-        recorder.current = null;
-      }
+        if (recorder.current) {
+          await recorder.current.stopRecording();
+          await recorder.current.destroy();
+          recorder.current = null;
+        }
+      })();
     };
   }, []);
 
